@@ -9,6 +9,40 @@ from database import get_db
 
 router = APIRouter(tags=["public"])
 
+@router.get("/public/foodbanks", response_model=List[schemas.FoodBank])
+def get_public_foodbanks(
+    district: str = None,
+    db: Session = Depends(get_db)
+):
+    """
+    Public endpoint to get a list of foodbanks without authentication.
+    Can be filtered by district.
+    """
+    query = db.query(models.FoodBank)
+    
+    if district:
+        query = query.filter(models.FoodBank.district == district)
+    
+    return query.all()
+
+@router.get("/public/districts", response_model=List[schemas.District])
+def get_public_districts(
+    db: Session = Depends(get_db)
+):
+    """
+    Public endpoint to get a list of districts without authentication.
+    """
+    return db.query(models.District).all()
+
+@router.get("/public/food-items", response_model=List[schemas.FoodItem])
+def get_public_food_items(
+    db: Session = Depends(get_db)
+):
+    """
+    Public endpoint to get a list of food items without authentication.
+    """
+    return db.query(models.FoodItem).all()
+
 @router.post("/public/requests", status_code=status.HTTP_201_CREATED)
 def create_public_request(
     request_data: dict,
