@@ -1,0 +1,131 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Kuala Lumpur",
+        "state": "Federal Territory",
+        "requests": 25,
+        "pending": 10
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [101.6, 3.05],
+            [101.8, 3.05],
+            [101.8, 3.18],
+            [101.6, 3.18],
+            [101.6, 3.05]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Petaling Jaya",
+        "state": "Selangor",
+        "requests": 18,
+        "pending": 5
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [101.5, 3.05],
+            [101.65, 3.05],
+            [101.65, 3.15],
+            [101.5, 3.15],
+            [101.5, 3.05]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Johor Bahru",
+        "state": "Johor",
+        "requests": 15,
+        "pending": 8
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [103.7, 1.45],
+            [103.8, 1.45],
+            [103.8, 1.55],
+            [103.7, 1.55],
+            [103.7, 1.45]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Penang Island",
+        "state": "Penang",
+        "requests": 12,
+        "pending": 3
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [100.25, 5.35],
+            [100.35, 5.35],
+            [100.35, 5.45],
+            [100.25, 5.45],
+            [100.25, 5.35]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Kota Kinabalu",
+        "state": "Sabah",
+        "requests": 20,
+        "pending": 12
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [116.05, 5.95],
+            [116.15, 5.95],
+            [116.15, 6.05],
+            [116.05, 6.05],
+            [116.05, 5.95]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Kuching",
+        "state": "Sarawak",
+        "requests": 22,
+        "pending": 9
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [110.3, 1.5],
+            [110.4, 1.5],
+            [110.4, 1.6],
+            [110.3, 1.6],
+            [110.3, 1.5]
+          ]
+        ]
+      }
+    }
+  ]
+}
