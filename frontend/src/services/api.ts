@@ -13,7 +13,7 @@ import {
 } from '@/types';
 
 // API base URL for backend
-const API_BASE_URL = 'http://87.229.100.87:3001';
+const API_BASE_URL = 'API URL';
 
 // Create two axios instances - one with auth, one without
 const api = axios.create({
