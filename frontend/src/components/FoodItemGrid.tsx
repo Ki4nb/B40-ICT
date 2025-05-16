@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import FoodItemIcon from './FoodItemIcon';
 import { FoodItem } from '@/types';
 
@@ -8,6 +9,7 @@ interface FoodItemGridProps {
 }
 
 const FoodItemGrid = ({ foodItems, onSelectionChange }: FoodItemGridProps) => {
+  const { t } = useTranslation();
   const [selectedItems, setSelectedItems] = useState<Record<number, number>>({});
 
   const toggleItem = (itemId: number) => {
@@ -47,11 +49,17 @@ const FoodItemGrid = ({ foodItems, onSelectionChange }: FoodItemGridProps) => {
     itemsByCategory[item.category].push(item);
   });
 
+  // Function to translate category name
+  const translateCategory = (category: string) => {
+    const categoryKey = category.toLowerCase().replace(/\s+/g, '');
+    return t(`foodCategories.${categoryKey}`, category); // Fallback to original if no translation
+  };
+
   return (
     <div className="space-y-6">
       {Object.entries(itemsByCategory).map(([category, items]) => (
         <div key={category}>
-          <h3 className="text-lg font-medium text-gray-900 mb-2">{category}</h3>
+          <h3 className="text-lg font-medium text-gray-900 mb-2">{translateCategory(category)}</h3>
           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
             {items.map(item => (
               <div key={item.id} className="relative">

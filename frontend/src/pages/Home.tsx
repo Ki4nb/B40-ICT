@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { District, FoodBank } from '@/types';
 import { getPublicFoodbanks, getDistricts } from '@/services/api';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { Icon } from 'leaflet';
 
 const Home = () => {
+  const { t } = useTranslation();
   const [foodbanks, setFoodbanks] = useState<FoodBank[]>([]);
   const [districts, setDistricts] = useState<District[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -49,25 +51,23 @@ const Home = () => {
           <div className="mx-auto max-w-2xl py-16 sm:py-24 lg:py-32">
             <div className="text-center">
               <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                B40 Food Aid Management Platform
+                {t('home.title')}
               </h1>
               <p className="mt-6 text-lg leading-8 text-gray-600">
-                Helping connect those in need with food resources across Malaysia. 
-                Our platform coordinates between users, food banks, and organizations 
-                to ensure efficient distribution of food aid.
+                {t('home.subtitle')}
               </p>
               <div className="mt-10 flex items-center justify-center gap-x-6">
                 <Link
                   to="/request"
                   className="rounded-md bg-primary-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
                 >
-                  Request Food Aid
+                  {t('home.requestButton')}
                 </Link>
                 <Link 
                   to="/track" 
                   className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-primary-600 shadow-sm border border-primary-200 hover:bg-gray-50"
                 >
-                  Track Request
+                  {t('home.trackButton')}
                 </Link>
               </div>
             </div>
@@ -79,12 +79,12 @@ const Home = () => {
       <div className="bg-white py-12">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl lg:text-center">
-            <h2 className="text-base font-semibold leading-7 text-primary-600">How It Works</h2>
+            <h2 className="text-base font-semibold leading-7 text-primary-600">{t('home.howItWorks.sectionTitle')}</h2>
             <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              A Simple Process for Food Aid
+              {t('home.howItWorks.title')}
             </p>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              Our platform connects users in need with local food banks and aid organizations through a streamlined process.
+              {t('home.howItWorks.subtitle')}
             </p>
           </div>
           <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
@@ -94,10 +94,10 @@ const Home = () => {
                   <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-primary-600 text-white">
                     1
                   </div>
-                  Request Food Aid
+                  {t('home.howItWorks.step1.title')}
                 </dt>
                 <dd className="mt-2 text-base leading-7 text-gray-600">
-                  Submit a simple request using our icon-based interface. No registration required - just tell us what you need and where you are.
+                  {t('home.howItWorks.step1.desc')}
                 </dd>
               </div>
               <div className="relative pl-16">
@@ -105,10 +105,10 @@ const Home = () => {
                   <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-primary-600 text-white">
                     2
                   </div>
-                  Get Tracking Number
+                  {t('home.howItWorks.step2.title')}
                 </dt>
                 <dd className="mt-2 text-base leading-7 text-gray-600">
-                  Receive a unique tracking number to monitor your request status anytime. Keep this number safe.
+                  {t('home.howItWorks.step2.desc')}
                 </dd>
               </div>
               <div className="relative pl-16">
@@ -116,10 +116,10 @@ const Home = () => {
                   <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-primary-600 text-white">
                     3
                   </div>
-                  Assignment to Food Bank
+                  {t('home.howItWorks.step3.title')}
                 </dt>
                 <dd className="mt-2 text-base leading-7 text-gray-600">
-                  Our aid organizations review requests and assign them to the closest food bank with matching inventory.
+                  {t('home.howItWorks.step3.desc')}
                 </dd>
               </div>
               <div className="relative pl-16">
@@ -127,10 +127,10 @@ const Home = () => {
                   <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-primary-600 text-white">
                     4
                   </div>
-                  Receive Your Aid Package
+                  {t('home.howItWorks.step4.title')}
                 </dt>
                 <dd className="mt-2 text-base leading-7 text-gray-600">
-                  Once your request is fulfilled, you'll be notified when and where to collect your food aid package.
+                  {t('home.howItWorks.step4.desc')}
                 </dd>
               </div>
             </dl>
@@ -142,18 +142,19 @@ const Home = () => {
       <div className="bg-white py-12">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl lg:text-center">
-            <h2 className="text-base font-semibold leading-7 text-primary-600">Our Network</h2>
+            <h2 className="text-base font-semibold leading-7 text-primary-600">{t('home.networkSection.sectionTitle')}</h2>
             <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              Food Banks Across Malaysia
+              {t('home.networkSection.title')}
             </p>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              We partner with food banks throughout the country to ensure aid reaches those who need it most.
+              {t('home.networkSection.subtitle')}
             </p>
           </div>
           
           {isLoading ? (
-            <div className="flex justify-center mt-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+            <div className="flex justify-center mt-12 flex-col items-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mb-2"></div>
+              <p className="text-gray-600">{t('home.networkSection.loading')}</p>
             </div>
           ) : (
             <div className="mt-8 h-[500px] rounded-lg overflow-hidden shadow-lg">
@@ -176,9 +177,9 @@ const Home = () => {
                     <Popup>
                       <div>
                         <h3 className="font-bold">{foodbank.name}</h3>
-                        <p><span className="font-semibold">Location:</span> {foodbank.location}</p>
-                        <p><span className="font-semibold">District:</span> {foodbank.district}</p>
-                        <p><span className="font-semibold">Contact:</span> {foodbank.contact_info}</p>
+                        <p><span className="font-semibold">{t('home.networkSection.location')}:</span> {foodbank.location}</p>
+                        <p><span className="font-semibold">{t('home.networkSection.district')}:</span> {foodbank.district}</p>
+                        <p><span className="font-semibold">{t('home.networkSection.contact')}:</span> {foodbank.contact_info}</p>
                       </div>
                     </Popup>
                   </Marker>

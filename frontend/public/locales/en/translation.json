@@ -1,0 +1,130 @@
+{
+  "nav": {
+    "home": "Home",
+    "requestFood": "Request Food Aid",
+    "trackRequest": "Track Request",
+    "login": "Log in",
+    "register": "Register",
+    "myRequests": "My Requests",
+    "inventory": "Inventory",
+    "requests": "Requests",
+    "dashboard": "Dashboard",
+    "foodbanks": "Foodbanks",
+    "allRequests": "All Requests"
+  },
+  "home": {
+    "title": "B40 Food Aid Management Platform",
+    "subtitle": "Helping connect those in need with food resources across Malaysia. Our platform coordinates between users, food banks, and organizations to ensure efficient distribution of food aid.",
+    "requestButton": "Request Food Aid",
+    "trackButton": "Track Request",
+    "howItWorks": {
+      "sectionTitle": "How It Works",
+      "title": "A Simple Process for Food Aid",
+      "subtitle": "Our platform connects users in need with local food banks and aid organizations through a streamlined process.",
+      "step1": {
+        "title": "Request Food Aid",
+        "desc": "Submit a simple request using our icon-based interface. No registration required - just tell us what you need and where you are."
+      },
+      "step2": {
+        "title": "Get Tracking Number",
+        "desc": "Receive a unique tracking number to monitor your request status anytime. Keep this number safe."
+      },
+      "step3": {
+        "title": "Assignment to Food Bank",
+        "desc": "Our aid organizations review requests and assign them to the closest food bank with matching inventory."
+      },
+      "step4": {
+        "title": "Receive Your Aid Package",
+        "desc": "Once your request is fulfilled, you'll be notified when and where to collect your food aid package."
+      }
+    },
+    "networkSection": {
+      "sectionTitle": "Our Network",
+      "title": "Food Banks Across Malaysia",
+      "subtitle": "We partner with food banks throughout the country to ensure aid reaches those who need it most.",
+      "loading": "Loading...",
+      "location": "Location",
+      "district": "District",
+      "contact": "Contact"
+    }
+  },
+  "trackRequest": {
+    "title": "Track Your Request",
+    "subtitle": "Enter your tracking number to check the status of your food aid request.",
+    "trackingNumber": "Tracking Number",
+    "placeholder": "B40-XXXXXX",
+    "trackButton": "Track",
+    "tracking": "Tracking...",
+    "errors": {
+      "emptyTracking": "Please enter a tracking number",
+      "notFound": "Request not found. Please check your tracking number.",
+      "general": "An error occurred while tracking your request. Please try again."
+    },
+    "requestInfo": {
+      "request": "Request",
+      "submitted": "Submitted",
+      "itemsRequested": "Items Requested",
+      "assignedFoodBank": "Assigned Food Bank",
+      "location": "Location",
+      "contact": "Contact",
+      "fulfilled": "Your request was fulfilled on"
+    },
+    "status": {
+      "pending": "Pending",
+      "assigned": "Assigned",
+      "fulfilled": "Fulfilled",
+      "cancelled": "Cancelled"
+    }
+  },
+  "requestForm": {
+    "title": "Request Food Aid",
+    "subtitle": "Please fill out this form to request food assistance. Select the items you need and provide your information.",
+    "selectItems": "1. Select Items You Need",
+    "itemsDesc": "Click on items to add them to your request. Click again to increase quantity (up to 3), and again to remove.",
+    "yourInfo": "2. Your Information",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "icNumber": "IC Number",
+    "phoneNumber": "Phone Number",
+    "address": "Address",
+    "district": "District",
+    "useLocation": "Use my location",
+    "submit": "Submit Request",
+    "submitting": "Submitting...",
+    "trackingNumberTitle": "Your Tracking Number:",
+    "trackingNumberDesc": "Please save this number to check your request status later.",
+    "successTitle": "Request Submitted Successfully!",
+    "successDesc": "Our team will review your request and assign it to the nearest food bank.",
+    "returnHome": "Return to Home",
+    "selectDistrict": "Select a district",
+    "errorRequiredFields": "Please fill in all required fields",
+    "errorSelectItems": "Please select at least one food item",
+    "errorSubmit": "Failed to submit request. Please try again.",
+    "loading": "Loading..."
+  },
+  "foodCategories": {
+    "grains": "Grains",
+    "staples": "Staples",
+    "protein": "Protein",
+    "dairy": "Dairy",
+    "essentials": "Essentials",
+    "produce": "Fresh Produce",
+    "baby": "Baby Essentials"
+  },
+  "foodItems": {
+    "rice": "Rice",
+    "noodles": "Noodles",
+    "cooking_oil": "Cooking Oil",
+    "flour": "Flour",
+    "sugar": "Sugar",
+    "salt": "Salt",
+    "eggs": "Eggs",
+    "chicken": "Chicken",
+    "fish": "Fish",
+    "vegetables": "Vegetables",
+    "fruits": "Fruits",
+    "milk": "Milk",
+    "baby_formula": "Baby Formula",
+    "diapers": "Diapers"
+  }
+}

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FoodItem, District } from '@/types';
 import { getFoodItems, getDistricts, createPublicRequest } from '@/services/api';
 import FoodItemGrid from '@/components/FoodItemGrid';
+import { useTranslation } from 'react-i18next';
 
 const RequestForm = () => {
   const [foodItems, setFoodItems] = useState<FoodItem[]>([]);
@@ -14,6 +15,7 @@ const RequestForm = () => {
   const [trackingNumber, setTrackingNumber] = useState<string | null>(null);
   
   const navigate = useNavigate();
+  const { t } = useTranslation();
   
   const [formData, setFormData] = useState({
     firstName: '',
@@ -73,12 +75,12 @@ const RequestForm = () => {
     
     // Validate form
     if (!formData.firstName || !formData.lastName || !formData.icNumber || !formData.address || !formData.district) {
-      setError('Please fill in all required fields');
+      setError(t('requestForm.errorRequiredFields'));
       return;
     }
     
     if (formData.items.length === 0) {
-      setError('Please select at least one food item');
+      setError(t('requestForm.errorSelectItems'));
       return;
     }
     
@@ -120,7 +122,7 @@ const RequestForm = () => {
       
     } catch (error) {
       console.error('Error submitting request:', error);
-      setError('Failed to submit request. Please try again.');
+      setError(t('requestForm.errorSubmit'));
     } finally {
       setIsSubmitting(false);
     }
@@ -128,8 +130,9 @@ const RequestForm = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+      <div className="flex justify-center items-center h-64 flex-col">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mb-2"></div>
+        <p className="text-gray-600">{t('requestForm.loading')}</p>
       </div>
     );
   }
@@ -143,21 +146,20 @@ const RequestForm = () => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h2 className="mt-3 text-xl font-medium text-gray-900">Request Submitted Successfully!</h2>
+          <h2 className="mt-3 text-xl font-medium text-gray-900">{t('requestForm.successTitle')}</h2>
           
           {trackingNumber && (
             <div className="mt-4 p-4 bg-blue-50 rounded-md inline-block">
-              <p className="text-sm text-gray-600 mb-1">Your Tracking Number:</p>
+              <p className="text-sm text-gray-600 mb-1">{t('requestForm.trackingNumberTitle')}</p>
               <p className="text-xl font-bold text-primary-600">{trackingNumber}</p>
               <p className="mt-2 text-sm text-gray-500">
-                Please save this number to check your request status later.
+                {t('requestForm.trackingNumberDesc')}
               </p>
             </div>
           )}
           
           <p className="mt-4 text-gray-600">
-            Our team will review your request and assign it to the nearest food bank.
-            You will receive further instructions about collecting your food aid package.
+            {t('requestForm.successDesc')}
           </p>
           
           <div className="mt-6">
@@ -166,7 +168,7 @@ const RequestForm = () => {
               onClick={() => navigate('/')}
               className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
             >
-              Return to Home
+              {t('requestForm.returnHome')}
             </button>
           </div>
         </div>
@@ -176,9 +178,9 @@ const RequestForm = () => {
 
   return (
     <div className="bg-white shadow sm:rounded-lg p-6 max-w-3xl mx-auto">
-      <h2 className="text-xl font-semibold text-gray-900">Request Food Aid</h2>
+      <h2 className="text-xl font-semibold text-gray-900">{t('requestForm.title')}</h2>
       <p className="mt-1 text-sm text-gray-600">
-        Please fill out this form to request food assistance. Select the items you need and provide your information.
+        {t('requestForm.subtitle')}
       </p>
       
       {error && (
@@ -198,9 +200,9 @@ const RequestForm = () => {
       
       <form onSubmit={handleSubmit} className="mt-6 space-y-6">
         <div>
-          <h3 className="text-lg font-medium text-gray-900">1. Select Items You Need</h3>
+          <h3 className="text-lg font-medium text-gray-900">{t('requestForm.selectItems')}</h3>
           <p className="mt-1 text-sm text-gray-600">
-            Click on items to add them to your request. Click again to increase quantity (up to 3), and again to remove.
+            {t('requestForm.itemsDesc')}
           </p>
           <div className="mt-4">
             <FoodItemGrid 
@@ -211,12 +213,12 @@ const RequestForm = () => {
         </div>
         
         <div className="border-t border-gray-200 pt-6">
-          <h3 className="text-lg font-medium text-gray-900">2. Your Information</h3>
+          <h3 className="text-lg font-medium text-gray-900">{t('requestForm.yourInfo')}</h3>
           
           <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
             <div>
               <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
-                First Name <span className="text-red-500">*</span>
+                {t('requestForm.firstName')} <span className="text-red-500">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -233,7 +235,7 @@ const RequestForm = () => {
             
             <div>
               <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
-                Last Name <span className="text-red-500">*</span>
+                {t('requestForm.lastName')} <span className="text-red-500">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -250,7 +252,7 @@ const RequestForm = () => {
             
             <div>
               <label htmlFor="icNumber" className="block text-sm font-medium text-gray-700">
-                IC Number <span className="text-red-500">*</span>
+                {t('requestForm.icNumber')} <span className="text-red-500">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -268,7 +270,7 @@ const RequestForm = () => {
             
             <div>
               <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700">
-                Phone Number
+                {t('requestForm.phoneNumber')}
               </label>
               <div className="mt-1">
                 <input
@@ -285,7 +287,7 @@ const RequestForm = () => {
             
             <div className="sm:col-span-2">
               <label htmlFor="address" className="block text-sm font-medium text-gray-700">
-                Address <span className="text-red-500">*</span>
+                {t('requestForm.address')} <span className="text-red-500">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -302,7 +304,7 @@ const RequestForm = () => {
             
             <div>
               <label htmlFor="district" className="block text-sm font-medium text-gray-700">
-                District <span className="text-red-500">*</span>
+                {t('requestForm.district')} <span className="text-red-500">*</span>
               </label>
               <div className="mt-1">
                 <select
@@ -313,7 +315,7 @@ const RequestForm = () => {
                   onChange={handleInputChange}
                   className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
                 >
-                  <option value="">Select a district</option>
+                  <option value="">{t('requestForm.selectDistrict')}</option>
                   {districts.map(district => (
                     <option key={district.id} value={district.name}>
                       {district.name}, {district.state}
@@ -332,7 +334,7 @@ const RequestForm = () => {
                 <svg className="-ml-1 mr-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                 </svg>
-                Use my location
+                {t('requestForm.useLocation')}
               </button>
             </div>
           </div>
@@ -350,10 +352,10 @@ const RequestForm = () => {
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
-                Submitting...
+                {t('requestForm.submitting')}
               </>
             ) : (
-              'Submit Request'
+              t('requestForm.submit')
             )}
           </button>
         </div>

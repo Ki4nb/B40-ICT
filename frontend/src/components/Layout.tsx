@@ -3,6 +3,8 @@ import { Link, useLocation, NavLink } from 'react-router-dom';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useAuth } from '@/contexts/AuthContext';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from './LanguageSwitcher';
 
 interface LayoutProps {
   children: ReactNode;
@@ -11,19 +13,20 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   const { isAuthenticated, user, userRole, logout } = useAuth();
   const location = useLocation();
+  const { t } = useTranslation();
 
-  // Define navigation items
+  // Define navigation items with translations
   const navigation = [
-    { name: 'Home', href: '/' },
-    { name: 'Request Food Aid', href: '/request' },
-    { name: 'Track Request', href: '/track' },
+    { name: t('nav.home'), href: '/' },
+    { name: t('nav.requestFood'), href: '/request' },
+    { name: t('nav.trackRequest'), href: '/track' },
   ];
 
   // Role-specific navigation items
   if (isAuthenticated && user) {
     if (userRole === 'user') {
       navigation.push({ 
-        name: 'My Requests', 
+        name: t('nav.myRequests'), 
         href: '/my-requests'
       });
     }
@@ -31,11 +34,11 @@ const Layout = ({ children }: LayoutProps) => {
     if (userRole === 'foodbank') {
       navigation.push(
         { 
-          name: 'Inventory', 
+          name: t('nav.inventory'), 
           href: '/inventory'
         },
         { 
-          name: 'Requests', 
+          name: t('nav.requests'), 
           href: '/foodbank-requests'
         }
       );
@@ -44,15 +47,15 @@ const Layout = ({ children }: LayoutProps) => {
     if (userRole === 'org') {
       navigation.push(
         { 
-          name: 'Dashboard', 
+          name: t('nav.dashboard'), 
           href: '/admin-dashboard'
         },
         { 
-          name: 'Foodbanks', 
+          name: t('nav.foodbanks'), 
           href: '/foodbanks'
         },
         { 
-          name: 'All Requests', 
+          name: t('nav.allRequests'), 
           href: '/all-requests'
         }
       );
@@ -103,6 +106,8 @@ const Layout = ({ children }: LayoutProps) => {
                   </div>
                 </div>
                 <div className="hidden sm:ml-6 sm:flex sm:items-center">
+                  <LanguageSwitcher />
+                  <div className="border-l mx-4 h-6 border-gray-200"></div>
                   {isAuthenticated ? (
                     <Menu as="div" className="relative ml-3">
                       <div>
@@ -191,6 +196,11 @@ const Layout = ({ children }: LayoutProps) => {
                     {item.name}
                   </NavLink>
                 ))}
+              </div>
+              <div className="px-4 py-3">
+                <div className="flex justify-center mb-3">
+                  <LanguageSwitcher />
+                </div>
               </div>
               <div className="border-t border-gray-200 pb-3 pt-4">
                 {isAuthenticated ? (

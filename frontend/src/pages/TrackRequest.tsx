@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { trackRequest } from '@/services/api';
 
 interface TrackingResult {
@@ -15,6 +16,7 @@ interface TrackingResult {
 }
 
 const TrackRequest = () => {
+  const { t, i18n } = useTranslation();
   const [trackingNumber, setTrackingNumber] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -24,7 +26,7 @@ const TrackRequest = () => {
     e.preventDefault();
     
     if (!trackingNumber.trim()) {
-      setError('Please enter a tracking number');
+      setError(t('trackRequest.errors.emptyTracking'));
       return;
     }
     
@@ -38,9 +40,9 @@ const TrackRequest = () => {
     } catch (error: any) {
       console.error('Error tracking request:', error);
       if (error.response?.status === 404) {
-        setError('Request not found. Please check your tracking number.');
+        setError(t('trackRequest.errors.notFound'));
       } else {
-        setError('An error occurred while tracking your request. Please try again.');
+        setError(t('trackRequest.errors.general'));
       }
     } finally {
       setIsLoading(false);
@@ -62,11 +64,28 @@ const TrackRequest = () => {
         return 'text-gray-600 bg-gray-100';
     }
   };
+  
+  // Translate status
+  const translateStatus = (status: string) => {
+    switch (status) {
+      case 'Pending':
+        return t('trackRequest.status.pending');
+      case 'Assigned':
+        return t('trackRequest.status.assigned');
+      case 'Fulfilled':
+        return t('trackRequest.status.fulfilled');
+      case 'Cancelled':
+        return t('trackRequest.status.cancelled');
+      default:
+        return status;
+    }
+  };
 
   // Format date
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-MY', {
+    const locale = i18n.language === 'ms' ? 'ms-MY' : 'en-MY';
+    return date.toLocaleDateString(locale, {
       year: 'numeric',
       month: 'short',
       day: 'numeric',
@@ -77,15 +96,15 @@ const TrackRequest = () => {
 
   return (
     <div className="bg-white shadow sm:rounded-lg p-6 max-w-3xl mx-auto">
-      <h2 className="text-xl font-semibold text-gray-900">Track Your Request</h2>
+      <h2 className="text-xl font-semibold text-gray-900">{t('trackRequest.title')}</h2>
       <p className="mt-1 text-sm text-gray-600">
-        Enter your tracking number to check the status of your food aid request.
+        {t('trackRequest.subtitle')}
       </p>
       
       <form onSubmit={handleSubmit} className="mt-6 space-y-4">
         <div>
           <label htmlFor="trackingNumber" className="block text-sm font-medium text-gray-700">
-            Tracking Number
+            {t('trackRequest.trackingNumber')}
           </label>
           <div className="mt-1 flex rounded-md shadow-sm">
             <input
@@ -93,7 +112,7 @@ const TrackRequest = () => {
               name="trackingNumber"
               id="trackingNumber"
               className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
-              placeholder="B40-XXXXXX"
+              placeholder={t('trackRequest.placeholder')}
               value={trackingNumber}
               onChange={(e) => setTrackingNumber(e.target.value)}
             />
@@ -102,7 +121,7 @@ const TrackRequest = () => {
               disabled={isLoading}
               className="ml-3 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
             >
-              {isLoading ? 'Tracking...' : 'Track'}
+              {isLoading ? t('trackRequest.tracking') : t('trackRequest.trackButton')}
             </button>
           </div>
         </div>
@@ -127,16 +146,16 @@ const TrackRequest = () => {
         <div className="mt-8 border-t border-gray-200 pt-8">
           <div className="flex justify-between items-start">
             <div>
-              <h3 className="text-lg font-medium">Request {result.tracking_number}</h3>
-              <p className="text-sm text-gray-500">Submitted: {formatDate(result.created_at)}</p>
+              <h3 className="text-lg font-medium">{t('trackRequest.requestInfo.request')} {result.tracking_number}</h3>
+              <p className="text-sm text-gray-500">{t('trackRequest.requestInfo.submitted')}: {formatDate(result.created_at)}</p>
             </div>
             <div className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(result.status)}`}>
-              {result.status}
+              {translateStatus(result.status)}
             </div>
           </div>
           
           <div className="mt-6 border-t border-gray-200 pt-6">
-            <h4 className="text-sm font-medium text-gray-500 uppercase tracking-wider">Items Requested</h4>
+            <h4 className="text-sm font-medium text-gray-500 uppercase tracking-wider">{t('trackRequest.requestInfo.itemsRequested')}</h4>
             <ul className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
               {result.items.map((item, index) => (
                 <li key={index} className="flex items-center justify-between py-2 border-b border-gray-100">
@@ -149,11 +168,11 @@ const TrackRequest = () => {
           
           {result.foodbank && (
             <div className="mt-6 border-t border-gray-200 pt-6">
-              <h4 className="text-sm font-medium text-gray-500 uppercase tracking-wider">Assigned Food Bank</h4>
+              <h4 className="text-sm font-medium text-gray-500 uppercase tracking-wider">{t('trackRequest.requestInfo.assignedFoodBank')}</h4>
               <div className="mt-3 bg-blue-50 rounded-md p-4">
                 <p className="text-sm font-medium text-gray-700">{result.foodbank.name}</p>
-                <p className="text-sm text-gray-500 mt-1">Location: {result.foodbank.location}</p>
-                <p className="text-sm text-gray-500 mt-1">Contact: {result.foodbank.contact_info}</p>
+                <p className="text-sm text-gray-500 mt-1">{t('trackRequest.requestInfo.location')}: {result.foodbank.location}</p>
+                <p className="text-sm text-gray-500 mt-1">{t('trackRequest.requestInfo.contact')}: {result.foodbank.contact_info}</p>
               </div>
             </div>
           )}
@@ -169,7 +188,7 @@ const TrackRequest = () => {
                   </div>
                   <div className="ml-3">
                     <p className="text-sm font-medium text-green-800">
-                      Your request was fulfilled on {formatDate(result.fulfilled_at)}
+                      {t('trackRequest.requestInfo.fulfilled')} {formatDate(result.fulfilled_at)}
                     </p>
                   </div>
                 </div>

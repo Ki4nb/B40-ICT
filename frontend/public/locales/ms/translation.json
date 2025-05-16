@@ -1,0 +1,130 @@
+{
+  "nav": {
+    "home": "Laman Utama",
+    "requestFood": "Mohon Bantuan Makanan",
+    "trackRequest": "Jejak Permohonan",
+    "login": "Log Masuk",
+    "register": "Daftar",
+    "myRequests": "Permohonan Saya",
+    "inventory": "Inventori",
+    "requests": "Permohonan",
+    "dashboard": "Papan Pemuka",
+    "foodbanks": "Bank Makanan",
+    "allRequests": "Semua Permohonan"
+  },
+  "home": {
+    "title": "Platform Pengurusan Bantuan Makanan B40",
+    "subtitle": "Membantu menghubungkan mereka yang memerlukan dengan sumber makanan di seluruh Malaysia. Platform kami menyelaras antara pengguna, bank makanan, dan organisasi untuk memastikan pengagihan bantuan makanan yang cekap.",
+    "requestButton": "Mohon Bantuan Makanan",
+    "trackButton": "Jejak Permohonan",
+    "howItWorks": {
+      "sectionTitle": "Cara Ia Berfungsi",
+      "title": "Proses Mudah untuk Bantuan Makanan",
+      "subtitle": "Platform kami menghubungkan pengguna yang memerlukan dengan bank makanan tempatan dan organisasi bantuan melalui proses yang lancar.",
+      "step1": {
+        "title": "Mohon Bantuan Makanan",
+        "desc": "Hantar permohonan mudah menggunakan antara muka berasaskan ikon. Tiada pendaftaran diperlukan - hanya beritahu kami apa yang anda perlukan dan di mana anda berada."
+      },
+      "step2": {
+        "title": "Dapatkan Nombor Penjejakan",
+        "desc": "Terima nombor penjejakan unik untuk memantau status permohonan anda pada bila-bila masa. Simpan nombor ini dengan selamat."
+      },
+      "step3": {
+        "title": "Tugasan ke Bank Makanan",
+        "desc": "Organisasi bantuan kami menyemak permohonan dan menugaskannya kepada bank makanan terdekat dengan inventori yang sepadan."
+      },
+      "step4": {
+        "title": "Terima Pakej Bantuan Anda",
+        "desc": "Setelah permohonan anda dipenuhi, anda akan dimaklumkan bila dan di mana untuk mengambil pakej bantuan makanan anda."
+      }
+    },
+    "networkSection": {
+      "sectionTitle": "Rangkaian Kami",
+      "title": "Bank Makanan Di Seluruh Malaysia",
+      "subtitle": "Kami bekerjasama dengan bank makanan di seluruh negara untuk memastikan bantuan sampai kepada mereka yang paling memerlukan.",
+      "loading": "Memuatkan...",
+      "location": "Lokasi",
+      "district": "Daerah",
+      "contact": "Hubungi"
+    }
+  },
+  "trackRequest": {
+    "title": "Jejak Permohonan Anda",
+    "subtitle": "Masukkan nombor penjejakan anda untuk memeriksa status permohonan bantuan makanan anda.",
+    "trackingNumber": "Nombor Penjejakan",
+    "placeholder": "B40-XXXXXX",
+    "trackButton": "Jejak",
+    "tracking": "Menjejak...",
+    "errors": {
+      "emptyTracking": "Sila masukkan nombor penjejakan",
+      "notFound": "Permohonan tidak dijumpai. Sila semak nombor penjejakan anda.",
+      "general": "Ralat berlaku semasa menjejak permohonan anda. Sila cuba lagi."
+    },
+    "requestInfo": {
+      "request": "Permohonan",
+      "submitted": "Dihantar",
+      "itemsRequested": "Item yang Dimohon",
+      "assignedFoodBank": "Bank Makanan yang Ditugaskan",
+      "location": "Lokasi",
+      "contact": "Hubungi",
+      "fulfilled": "Permohonan anda telah dipenuhi pada"
+    },
+    "status": {
+      "pending": "Menunggu",
+      "assigned": "Ditugaskan",
+      "fulfilled": "Dipenuhi",
+      "cancelled": "Dibatalkan"
+    }
+  },
+  "requestForm": {
+    "title": "Mohon Bantuan Makanan",
+    "subtitle": "Sila isi borang ini untuk memohon bantuan makanan. Pilih item yang anda perlukan dan berikan maklumat anda.",
+    "selectItems": "1. Pilih Item Yang Anda Perlukan",
+    "itemsDesc": "Klik pada item untuk menambahkannya ke dalam permohonan anda. Klik lagi untuk meningkatkan kuantiti (sehingga 3), dan sekali lagi untuk mengeluarkannya.",
+    "yourInfo": "2. Maklumat Anda",
+    "firstName": "Nama Pertama",
+    "lastName": "Nama Akhir",
+    "icNumber": "Nombor IC",
+    "phoneNumber": "Nombor Telefon",
+    "address": "Alamat",
+    "district": "Daerah",
+    "useLocation": "Gunakan lokasi saya",
+    "submit": "Hantar Permohonan",
+    "submitting": "Menghantar...",
+    "trackingNumberTitle": "Nombor Penjejakan Anda:",
+    "trackingNumberDesc": "Sila simpan nombor ini untuk memeriksa status permohonan anda kemudian.",
+    "successTitle": "Permohonan Berjaya Dihantar!",
+    "successDesc": "Pasukan kami akan menyemak permohonan anda dan menugaskannya kepada bank makanan terdekat.",
+    "returnHome": "Kembali ke Laman Utama",
+    "selectDistrict": "Pilih daerah",
+    "errorRequiredFields": "Sila isi semua ruangan yang diperlukan",
+    "errorSelectItems": "Sila pilih sekurang-kurangnya satu item makanan",
+    "errorSubmit": "Gagal menghantar permohonan. Sila cuba lagi.",
+    "loading": "Memuatkan..."
+  },
+  "foodCategories": {
+    "grains": "Bijirin",
+    "staples": "Keperluan Asas",
+    "protein": "Protein",
+    "dairy": "Tenusu",
+    "essentials": "Keperluan",
+    "produce": "Makanan Segar",
+    "baby": "Keperluan Bayi"
+  },
+  "foodItems": {
+    "rice": "Beras",
+    "noodles": "Mee",
+    "cooking_oil": "Minyak Masak",
+    "flour": "Tepung",
+    "sugar": "Gula",
+    "salt": "Garam",
+    "eggs": "Telur",
+    "chicken": "Ayam",
+    "fish": "Ikan",
+    "vegetables": "Sayur-sayuran",
+    "fruits": "Buah-buahan",
+    "milk": "Susu",
+    "baby_formula": "Susu Formula Bayi",
+    "diapers": "Lampin Pakai Buang"
+  }
+}

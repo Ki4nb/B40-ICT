@@ -93,6 +93,6 @@ http://localhost:8000/docs
 - Clear color-based request status (e.g. red = unassigned, green = fulfilled)
 
 ## Future Improvements
-- Multi-language support (BM, English)
+- Multi-language support (BM, English) -- added partially
 - Real-time notification system
 - Upload request via photo
