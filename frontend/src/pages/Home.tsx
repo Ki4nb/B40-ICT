@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { District, FoodBank } from '@/types';
-import { getFoodbanks, getDistricts } from '@/services/api';
+import { getPublicFoodbanks, getDistricts } from '@/services/api';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { Icon } from 'leaflet';
 
@@ -14,7 +14,7 @@ const Home = () => {
     const fetchData = async () => {
       try {
         const [foodbanksData, districtsData] = await Promise.all([
-          getFoodbanks(),
+          getPublicFoodbanks(),
           getDistricts()
         ]);
         
