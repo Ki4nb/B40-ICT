@@ -79,12 +79,40 @@ const Layout = ({ children }: LayoutProps) => {
               <div className="flex h-16 justify-between">
                 <div className="flex">
                   <div className="flex flex-shrink-0 items-center">
-                    <Link to="/">
+                    <Link to="/" className="flex items-center">
                       <img
                         className="h-8 w-auto"
                         src="/logo.svg"
                         alt="B40 Food Aid"
                       />
+                      <span className="inline-block ml-2 border border-gray-200 rounded-full overflow-hidden h-6 w-6 shadow-sm">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                          {/* Half Malaysia Flag */}
+                          <clipPath id="leftHalf">
+                            <rect x="0" y="0" width="12" height="24" />
+                          </clipPath>
+                          <g clipPath="url(#leftHalf)">
+                            <rect width="24" height="24" fill="#CC0001" />
+                            <rect y="0" width="24" height="3" fill="#fff" />
+                            <rect y="6" width="24" height="3" fill="#fff" />
+                            <rect y="12" width="24" height="3" fill="#fff" />
+                            <rect y="18" width="24" height="3" fill="#fff" />
+                            <rect width="10" height="12" fill="#010066" />
+                            <path fill="#FC0" d="M4 2a5 5 0 100 8 4 4 0 110-8z" />
+                            <path fill="#FC0" d="M6 6l-1 2-2 .4 1.4 1.6-.2 2 1.8-1 1.8 1-.2-2 1.4-1.6-2-.4z" />
+                          </g>
+                          
+                          {/* Half Netherlands Flag */}
+                          <clipPath id="rightHalf">
+                            <rect x="12" y="0" width="12" height="24" />
+                          </clipPath>
+                          <g clipPath="url(#rightHalf)">
+                            <rect y="0" width="24" height="8" fill="#AE1C28" />
+                            <rect y="8" width="24" height="8" fill="#fff" />
+                            <rect y="16" width="24" height="8" fill="#21468B" />
+                          </g>
+                        </svg>
+                      </span>
                     </Link>
                   </div>
                   <div className="hidden sm:ml-6 sm:flex sm:space-x-8 relative z-30">
