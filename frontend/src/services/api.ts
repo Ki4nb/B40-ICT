@@ -62,20 +62,34 @@ export const getCurrentUser = async (token: string): Promise<User> => {
 
 // Food Items - public access
 export const getFoodItems = async (): Promise<FoodItem[]> => {
-  const response = await publicApi.get<FoodItem[]>('/food-items');
+  const response = await publicApi.get<FoodItem[]>('/public/food-items');
   return response.data;
 };
 
 // Districts - public access
 export const getDistricts = async (): Promise<District[]> => {
-  const response = await publicApi.get<District[]>('/districts');
+  const response = await publicApi.get<District[]>('/public/districts');
   return response.data;
 };
 
-// Foodbanks
+// Foodbanks - with both public and authenticated access
 export const getFoodbanks = async (district?: string): Promise<FoodBank[]> => {
   const params = district ? { district } : {};
-  const response = await api.get<FoodBank[]>('/foodbanks', { params });
+  try {
+    // First try the authenticated endpoint (for logged-in users)
+    const response = await api.get<FoodBank[]>('/foodbanks', { params });
+    return response.data;
+  } catch (error) {
+    // Fall back to public endpoint if authentication fails
+    const response = await publicApi.get<FoodBank[]>('/public/foodbanks', { params });
+    return response.data;
+  }
+};
+
+// Public foodbanks - specifically for public pages
+export const getPublicFoodbanks = async (district?: string): Promise<FoodBank[]> => {
+  const params = district ? { district } : {};
+  const response = await publicApi.get<FoodBank[]>('/public/foodbanks', { params });
   return response.data;
 };
 
