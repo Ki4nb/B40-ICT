@@ -110,9 +110,14 @@ def update_request(
     if not db_request:
         raise HTTPException(status_code=404, detail="Request not found")
     
-    # Only org users can assign requests
-    if request_update.assigned_to_id is not None and current_user.role != "org":
-        raise HTTPException(status_code=403, detail="Only organization admins can assign requests")
+    # Handle request assignment/reassignment
+    if request_update.assigned_to_id is not None:
+        # Organization admins can assign/reassign any request
+        if current_user.role == "org":
+            pass  # Allow org users to assign/reassign
+        # Foodbank users aren't allowed to assign requests
+        else:
+            raise HTTPException(status_code=403, detail="Only organization admins can assign requests")
     
     # Foodbank users can only update status of requests assigned to them
     if current_user.role == "foodbank":
