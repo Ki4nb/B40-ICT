@@ -38,6 +38,11 @@ const RequestCard = ({ request, showActions = false, showAssign = false, onUpdat
     try {
       const data = await getFoodbanks();
       setFoodbanks(data);
+      
+      // If this is a reassignment, initialize with the current assignment
+      if (request.status === 'Assigned' && request.assigned_to_id) {
+        setSelectedFoodbank(request.assigned_to_id);
+      }
     } catch (error) {
       console.error('Error fetching foodbanks:', error);
       setError('Failed to load food banks.');
@@ -53,7 +58,9 @@ const RequestCard = ({ request, showActions = false, showAssign = false, onUpdat
     setIsLoading(true);
     setError(null);
     try {
-      await updateRequest(request.id, 'Assigned', selectedFoodbank);
+      // Use the current status if it's already assigned, otherwise set it to 'Assigned'
+      const newStatus = request.status === 'Assigned' ? request.status : 'Assigned';
+      await updateRequest(request.id, newStatus, selectedFoodbank);
       setIsAssigning(false);
       if (onUpdate) onUpdate();
     } catch (error) {
@@ -142,7 +149,7 @@ const RequestCard = ({ request, showActions = false, showAssign = false, onUpdat
           {isAssigning ? (
             <div className="space-y-3">
               <label className="block text-sm font-medium text-gray-700">
-                Select Food Bank
+                {request.status === 'Assigned' ? 'Reassign Food Bank' : 'Select Food Bank'}
                 <select
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
                   value={selectedFoodbank || ''}
@@ -163,7 +170,7 @@ const RequestCard = ({ request, showActions = false, showAssign = false, onUpdat
                   onClick={handleAssign}
                   disabled={isLoading}
                 >
-                  {isLoading ? 'Processing...' : 'Confirm Assignment'}
+                  {isLoading ? 'Processing...' : request.status === 'Assigned' ? 'Confirm Reassignment' : 'Confirm Assignment'}
                 </button>
                 <button
                   type="button"
@@ -188,14 +195,25 @@ const RequestCard = ({ request, showActions = false, showAssign = false, onUpdat
               )}
               
               {request.status === 'Assigned' && (
-                <button
-                  type="button"
-                  className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-                  onClick={handleFulfill}
-                  disabled={isFulfilling}
-                >
-                  {isFulfilling ? 'Processing...' : 'Mark as Fulfilled'}
-                </button>
+                <>
+                  <button
+                    type="button"
+                    className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                    onClick={handleFulfill}
+                    disabled={isFulfilling}
+                  >
+                    {isFulfilling ? 'Processing...' : 'Mark as Fulfilled'}
+                  </button>
+                  {showAssign && (
+                    <button
+                      type="button"
+                      className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                      onClick={handleShowAssign}
+                    >
+                      Reassign
+                    </button>
+                  )}
+                </>
               )}
               
               {(request.status === 'Pending' || request.status === 'Assigned') && (
